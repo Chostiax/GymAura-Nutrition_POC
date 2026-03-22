@@ -53,6 +53,8 @@ This will:
 - Print metrics and detailed results
 
 ## Project Structure
+
+```bash
 GYMAURA-NUTRITION-POC/
 │
 ├── data/
@@ -72,6 +74,7 @@ GYMAURA-NUTRITION-POC/
 ├── main.py
 ├── README.md
 └── requirements.txt
+```
 
 ## Design Decisions
 - Python-first approach for rapid iteration
