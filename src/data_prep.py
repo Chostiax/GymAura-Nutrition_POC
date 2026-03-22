@@ -19,6 +19,8 @@ GENERIC_DESCRIPTION_WORDS = {
     "broiled", "baked", "dry", "form", "frozen", "prepared", "plain",
 }
 
+# CSV exports are inconsistent: some rows contain valid JSON,
+# others look like Python literals. We try both parsers.
 
 def safe_parse_structure(value: Any):
     if pd.isna(value):
@@ -51,6 +53,8 @@ def extract_english_description(description_value: Any) -> str:
 
     return str(description_value).strip().lower() if description_value else ""
 
+# For matching, we normalize descriptions to lowercase and
+# reduce simple plurals so food phrases align better.
 
 def normalize_text(text: str) -> str:
     if not isinstance(text, str):
@@ -108,6 +112,8 @@ def iter_nutrient_items(nutrients_value: Any):
                     if isinstance(item, dict):
                         yield item
 
+# Nutrition values are stored per 100g in the dataset.
+# Later, nutrition.py scales them to the estimated serving size.
 
 def extract_macro_value(nutrients_value: Any, target_macro: str) -> float | None:
     aliases = TARGET_NUTRIENTS[target_macro]

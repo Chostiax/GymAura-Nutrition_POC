@@ -1,3 +1,6 @@
+# We only compute item nutrition when we can estimate grams.
+# If quantity or portion size is too vague, we keep nutrition as None.
+
 def estimate_grams(food_text: str, quantity: float | None, unit: str | None) -> float | None:
     food_text = food_text.lower().strip()
 

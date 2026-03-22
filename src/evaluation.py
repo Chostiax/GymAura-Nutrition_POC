@@ -1,6 +1,9 @@
+# Evaluation is intentionally strict:
+# a case is only fully successful when expected foods are detected
+# and all predicted items are matched to dataset rows.
+
 from src.matcher import apply_alias
 from src.pipeline import run_pipeline
-
 
 def normalize_expected_food(food_name: str) -> str:
     """

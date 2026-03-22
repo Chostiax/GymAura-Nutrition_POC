@@ -57,6 +57,12 @@ def token_overlap_score(query: str, candidate: str) -> float:
     overlap = len(query_tokens.intersection(candidate_tokens))
     return overlap / len(query_tokens)
 
+# Matching strategy order:
+# 1. alias normalization
+# 2. exact clean-text match
+# 3. token overlap score
+# 4. fuzzy fallback
+# This is safer than fuzzy-only matching for generic food words.
 
 def rank_token_candidate(query: str, candidate: str) -> tuple:
     query_tokens = query.split()

@@ -5,6 +5,14 @@ from src.pipeline import run_pipeline
 from src.evaluation import evaluate_pipeline
 from tests.test_cases import TEST_CASES
 
+"""
+Main entry point for the nutrition PoC.
+
+Flow:
+1. Load and clean the USDA-based dataset
+2. Run one manual demo sentence
+3. Evaluate the full pipeline on the benchmark test set
+"""
 
 DATA_PATH = "data/food_item_rows.csv"
 

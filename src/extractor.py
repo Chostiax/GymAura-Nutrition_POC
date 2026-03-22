@@ -1,5 +1,7 @@
 import re
 
+# This PoC only handles simple quantity patterns.
+# More complex portion understanding is intentionally out of scope.
 
 NUMBER_WORDS = {
     "a": 1,
@@ -86,6 +88,8 @@ TRAILING_PATTERNS = [
     "while waiting",
     "while waiting for dinner",
 ]
+# Words like "some", "just", or "a bit of" are useful in natural speech
+# but usually do not help with dataset matching, so we strip them.
 
 FILLER_PHRASES = [
     "some",
@@ -204,7 +208,7 @@ def extract_quantity_and_unit(segment: str) -> tuple[float | None, str | None, s
 
             return float(value), None, f"{second_token or ''} {rest}".strip()
 
-    # half a plate of ...
+    # half of ...
     half_match = re.match(r"^half\s+(?:a\s+|an\s+)?([a-z]+)\s+(.*)$", segment)
     if half_match:
         unit = half_match.group(1)
@@ -235,7 +239,8 @@ def is_context_only(text: str) -> bool:
 
 def extract_foods(text: str) -> list[dict]:
     normalized = clean_input_text(text)
-
+# If the user explicitly says they did not eat anything,
+# we short-circuit and return no items.
     if any(re.search(pattern, normalized) for pattern in NO_FOOD_PATTERNS):
         return []
 
