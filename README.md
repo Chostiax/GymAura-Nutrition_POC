@@ -41,7 +41,7 @@ Requirements:
 - Python 3.10+
 
 Install dependencies:
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 
 Run the project:
 python main.py
